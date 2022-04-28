@@ -27,7 +27,17 @@ function App() {
         return resp.json();
       })
       .then((data) => {
-        setMovies(data.results);
+        const transformedMovies = data.results.map(movieInfo => {
+          return {
+            id: movieInfo.episode_id,
+            title: movieInfo.title,
+            director: movieInfo.director,
+            producer: movieInfo.producer,
+            openingText: movieInfo.opening_crawl,
+            releaseDate: movieInfo.release_date
+          }
+        })
+        setMovies(transformedMovies);
       });
   }
 
